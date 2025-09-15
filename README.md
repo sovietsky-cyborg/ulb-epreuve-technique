@@ -1,0 +1,35 @@
+# ULB Epreuve technique
+
+This project include two parts
+* a golang rest api server who's manage all the database interaction and make proxy for the Swagger API
+* a SPA (Single Page Application) developed in React situated in the frontend sub-directory
+
+## REST API Server
+
+### build the sources
+
+`go build .`
+
+### Run the REST API Server
+
+`go run main.go`
+
+## SPA
+
+#### The frontend is situated in frontend/ directory
+
+### build the sources
+
+`npm run build`
+
+### Run Node dev server
+
+`npm run dev`
+
+## Or you can Run it as a container (dont forget to build the sources for the SPA)
+
+`docker-compose up -d `
+
+## Or
+
+`podman-compose up -d` 
