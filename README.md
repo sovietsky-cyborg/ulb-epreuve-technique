@@ -18,6 +18,10 @@ This project include two parts
 
 #### The frontend is situated in frontend/ directory
 
+### Install dependencies
+
+`ǹpm install`
+
 ### build the sources
 
 `npm run build`
@@ -26,10 +30,11 @@ This project include two parts
 
 `npm run dev`
 
-## Or you can Run it as a container (dont forget to build the sources for the SPA)
+## Or you can Run both of them as a container (dont forget to install dependencies and build the sources for the SPA)
 
 `docker-compose up -d `
 
 ## Or with Podman
 
 `podman-compose up -d` 
+
