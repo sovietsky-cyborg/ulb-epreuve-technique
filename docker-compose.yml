@@ -6,6 +6,6 @@ services:
     command: "go run main.go"
     volumes:
       - ".:/ulb-epreuve-technique:z"
-    working_dir: ""
+    working_dir: "/ulb-epreuve-technique"
     ports:
       - "8000:8000"
