@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {Button, Table} from "react-bootstrap";
 
 export function Inscriptions() {
     const [inscriptions, setInscriptions] = useState({})
@@ -21,13 +22,33 @@ export function Inscriptions() {
             <h1>Inscriptions</h1>;
             <ul className="list-group">
                 {isLoaded ?
-                    inscriptions.map(inscription => (
-                        <li className="list-group-item">
-                            <Link className="nav-link" to={`/bulletin/${inscription.matricule}/${inscription.annee_etude}`}>
-                                {inscription.nom} {inscription.prenom} Année: {inscription.annee_etude}
-                            </Link>
-                        </li>
-                    ))
+                    <Table striped bordered hover responsive>
+                        <thead className="bg-primary text-white">
+                        <tr>
+                            <th>Matricule</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Année</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {inscriptions.map((inscription) => (
+                            <tr key={inscription.matricule+"_"+inscription.annee_etude}>
+                                <td>{inscription.matricule}</td>
+                                <td>{inscription.nom}</td>
+                                <td>{inscription.prenom}</td>
+                                <td>{inscription.annee_etude}</td>
+                                <td>
+                                    <Link className="nav-link" to={`/bulletin/${inscription.matricule}/${inscription.annee_etude}`}>
+                                        <Button variant="info" size="sm">
+                                            Voir détails
+                                        </Button>
+                                    </Link>
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </Table>
                     :
                     <div>Nothing</div>
                 }

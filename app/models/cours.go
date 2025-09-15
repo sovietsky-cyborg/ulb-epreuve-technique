@@ -9,15 +9,13 @@ type ListeCours struct {
 	Intitule   string `json:"intitule"`
 	Credit     int    `json:"credit"`
 	Titulaire  string `json:"titulaire"`
-	//ListeNotes `xorm:"extends"`
 }
 
 func GetCours() ([]ListeCours, error) {
 
 	cours := []ListeCours{}
 	err := db.
-		Join("", "liste_notes", "liste_notes.mnemonique = liste_cours.mnemonique").
-		Select(" liste_cours.*, liste_notes.*").
+		Select("*").
 		Find(&cours)
 	fmt.Println("err", err)
 	fmt.Println("cours", cours)

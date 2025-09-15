@@ -1,4 +1,6 @@
 import {useEffect, useState} from "react";
+import {Button, Table} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 export function Cours() {
 
@@ -17,17 +19,34 @@ export function Cours() {
     }, []);
 
     return (
-        <div>
-            <h1>Cours</h1>
-            <ul className="list-group">
-                {isLoaded ?
-                    cours.map(cour => (
-                        <li className="list-group-item">{cour.intitule}</li>
-                    ))
-                    :
-                    <div>Loading..</div>
-                }
-            </ul>
-        </div>
+    <div>
+        <h1>Cours</h1>;
+        <ul className="list-group">
+            {isLoaded ?
+                <Table striped bordered hover responsive>
+                    <thead className="bg-primary text-white">
+                    <tr>
+                        <th>Mnemonique</th>
+                        <th>Intitule</th>
+                        <th>Credit</th>
+                        <th>Titulaire</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {cours.map((cour) => (
+                        <tr key={cour.mnemonique}>
+                            <td>{cour.mnemonique}</td>
+                            <td>{cour.intitule}</td>
+                            <td>{cour.credit}</td>
+                            <td>{cour.titulaire}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </Table>
+                :
+                <div>Nothing</div>
+            }
+        </ul>
+    </div>
     );
 }

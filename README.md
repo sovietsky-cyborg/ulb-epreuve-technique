@@ -14,6 +14,19 @@ This project include two parts
 
 `go run main.go`
 
+The REST API Server will be available on http://localhost:8000/api/v1/
+
+#### The routes are
+
+http://localhost:8000/api/v1/liste_inscriptions
+
+http://localhost:8000/api/v1/liste_cours
+
+http://localhost:8000/api/v1/liste_notes
+
+http://localhost:8000/api/v1/etudiants/{matricule}/annee/{annee}/bulletin
+
+
 ## SPA
 
 The frontend is situated in frontend/ directory
@@ -30,14 +43,18 @@ The frontend is situated in frontend/ directory
 
 `npm run dev`
 
-## Or With a docker container 
+You can now access the SPA on http://localhost:8000 (via the Go endpoint)
 
-`docker-compose up -d `
+or on http://localhost:5173 (the node test server)
 
-## Or with Podman
 
-`podman-compose up -d` 
+## docker or podman container 
+
+It will run it into a container (it was initially setup to add an idp service but did'nt have time to integrate it)
+
+`docker-compose up -d ` or `podman-compose up -d`
+http://localhost:8000
 
 [!NOTE]
-(dont forget to install dependencies and build the sources for the SPA)
+(dont forget to install dependencies and build the sources for the SPA before running containers)
 
