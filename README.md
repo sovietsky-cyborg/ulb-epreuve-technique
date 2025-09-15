@@ -30,11 +30,14 @@ This project include two parts
 
 `npm run dev`
 
-## Or you can Run both of them as a container (dont forget to install dependencies and build the sources for the SPA)
+## Or With a docker container 
 
 `docker-compose up -d `
 
 ## Or with Podman
 
 `podman-compose up -d` 
+
+[!NOTE] 
+(dont forget to install dependencies and build the sources for the SPA)
 
