@@ -23,7 +23,7 @@ export function Inscriptions() {
                 {isLoaded ?
                     inscriptions.map(inscription => (
                         <li className="list-group-item">
-                            <Link className="nav-link" to={`/bulletin/${inscription.nom}/${inscription.annee_etude}`}>
+                            <Link className="nav-link" to={`/bulletin/${inscription.matricule}/${inscription.annee_etude}`}>
                                 {inscription.nom} {inscription.prenom} Année: {inscription.annee_etude}
                             </Link>
                         </li>

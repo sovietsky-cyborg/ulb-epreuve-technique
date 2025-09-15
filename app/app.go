@@ -38,7 +38,7 @@ func (app *App) InitializeRoutes() {
 	app.Router.Handle("/api/v1/liste-cours", adapters.Adapt(controllers.GetCoursHandler, routesAdapters...)).Methods("GET")
 	app.Router.Handle("/api/v1/liste-inscriptions", adapters.Adapt(controllers.GetInscriptionsHandler, routesAdapters...)).Methods("GET")
 	app.Router.Handle("/api/v1/liste-notes", adapters.Adapt(controllers.GetNotesHandler, routesAdapters...)).Methods("GET")
-	app.Router.Handle("/api/v1/etudiants/{etudiant_nom}/annee/{annee}/bulletin", adapters.Adapt(controllers.GetBulletinHandler, routesAdapters...)).Methods("GET")
+	app.Router.Handle("/api/v1/etudiants/{matricule}/annee/{annee}/bulletin", adapters.Adapt(controllers.GetBulletinHandler, routesAdapters...)).Methods("GET")
 
 	spa := spaHandler{staticPath: "frontend/dist", indexPath: "index.html"}
 	app.Router.PathPrefix("/").Handler(spa)

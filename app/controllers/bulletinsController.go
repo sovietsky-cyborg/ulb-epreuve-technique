@@ -42,11 +42,11 @@ var GetBulletinHandler = func(w http.ResponseWriter, r *http.Request) interface{
 
 	vars := mux.Vars(r)
 	annee, _ := strconv.Atoi(vars["annee"])
-	etudiantNom := vars["etudiant_nom"]
+	matricule := vars["matricule"]
 
 	validate := validator.New()
 
-	err := validate.Var(etudiantNom, "required,alpha")
+	err := validate.Var(matricule, "required,alphanum")
 	if err != nil {
 		return utils.StatusError{Code: http.StatusBadRequest, Err: err}
 	}
@@ -58,38 +58,35 @@ var GetBulletinHandler = func(w http.ResponseWriter, r *http.Request) interface{
 
 	client := utils.GetClient()
 
-	body, err := client.GetData("/inscriptions")
+	body, err := client.GetData("/inscriptions?matricule=" + matricule)
 	if err != nil {
 		return err
 	}
 
-	var inscriptions []models.ListeInscriptions
-	err = json.Unmarshal(body, &inscriptions)
-	var currentInscription models.ListeInscriptions
-	for _, inscription := range inscriptions {
-		if inscription.AnneeEtude == annee && inscription.Nom == etudiantNom {
-			currentInscription = inscription
-		}
-	}
-	bulletin.Nom = currentInscription.Nom
-	bulletin.Prenom = currentInscription.Prenom
-	bulletin.Matricule = currentInscription.Matricule
-	bulletin.Annee = currentInscription.AnneeEtude
+	var result []models.ListeInscriptions
+	var inscription models.ListeInscriptions
+	err = json.Unmarshal(body, &result)
+	inscription = result[0]
+
+	bulletin.Nom = inscription.Nom
+	bulletin.Prenom = inscription.Prenom
+	bulletin.Matricule = inscription.Matricule
+	bulletin.Annee = inscription.AnneeEtude
 
 	// Just Get all the note for this inscription,
 	// no need to wait O(N_Courses * API_Calls) by calling swagger endpoint for each mnemonique
-	body, err = client.GetData("/notes?matricule=" + currentInscription.Matricule)
+	body, err = client.GetData("/notes?matricule=" + inscription.Matricule)
 	var notes []models.ListeNotes
 	err = json.Unmarshal(body, &notes)
 
 	notesByCours := make(map[string]models.ListeNotes)
-
 	// instead of that, we keep track of notes by mnemonique
 	for _, note := range notes {
 		notesByCours[note.Mnemonique] = note
 	}
 	has10OnAllCourses := true
-	for _, cour := range currentInscription.CoursJson {
+
+	for _, cour := range inscription.CoursJson {
 
 		body, err = client.GetData("/cours?mnemonique=" + cour)
 		var currentCours []models.ListeCours
