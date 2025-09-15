@@ -30,6 +30,6 @@ This project include two parts
 
 `docker-compose up -d `
 
-## Or
+## Or with Podman
 
 `podman-compose up -d` 
