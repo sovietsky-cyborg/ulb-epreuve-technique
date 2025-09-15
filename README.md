@@ -47,6 +47,14 @@ You can now access the SPA on http://localhost:8000 (via the Go endpoint)
 
 or on http://localhost:5173 (the node test server)
 
+#### SPA routes are 
+
+http://localhost:5173/cours
+
+http://localhost:5173/inscriptions
+
+http://localhost:5173/bulletin/{matricule}/{annee}
+
 
 ## docker or podman container 
 
