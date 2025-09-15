@@ -11,7 +11,6 @@ export function Inscriptions() {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log("result", result);
                     setInscriptions(result.data);
                     setIsLoaded(true);
                 }

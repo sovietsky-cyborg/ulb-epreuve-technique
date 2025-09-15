@@ -12,7 +12,6 @@ export function Cours() {
                 (result) => {
                     setCours(result.data);
                     setIsLoaded(true);
-                    console.log("result", result.data);
                 }
             )
     }, []);

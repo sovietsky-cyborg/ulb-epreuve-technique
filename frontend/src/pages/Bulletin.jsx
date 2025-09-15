@@ -16,7 +16,6 @@ export function Bulletin() {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log("result", result);
                     setBulletin(result.data);
                     setIsLoaded(true);
                 })
