@@ -1,0 +1,8 @@
+# UCL Epreuve Technique
+
+
+## Build the sources
+`go build .`
+
+## Run the API
+`go run main.go`
