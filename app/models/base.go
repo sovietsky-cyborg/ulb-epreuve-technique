@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+	"ucl-epreuve-technique/app/utils"
 
 	"xorm.io/xorm"
 )
@@ -17,7 +18,11 @@ func init() {
 		fmt.Println("Database error", err)
 	}
 	db = engine
-	db.ShowSQL(true)
+	if utils.GetEnv("APPLICATION_DEBUG") == "true" {
+		db.ShowSQL(true)
+	} else {
+		db.ShowSQL(false)
+	}
 
 }
 

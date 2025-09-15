@@ -79,9 +79,13 @@ func (app *App) Run() {
 
 	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"})
 
-	logger := log.New(os.Stdout, "", log.LstdFlags)
-
-	routesMiddlewares := middlewares.RoutesMiddlewares( /*middlewares.KeycloakAuthMiddleware("USERS"),*/ middlewares.Logging(logger))
+	var routesMiddlewares func(http.Handler) http.Handler
+	if utils.GetEnv("APPLICATION_DEBUG") == "true" {
+		logger := log.New(os.Stdout, "Debug ", log.LstdFlags)
+		routesMiddlewares = middlewares.RoutesMiddlewares( /*middlewares.KeycloakAuthMiddleware("USERS"),*/ middlewares.Logging(logger))
+	} else {
+		routesMiddlewares = middlewares.RoutesMiddlewares( /*middlewares.KeycloakAuthMiddleware("USERS"),*/)
+	}
 
 	port := utils.GetEnv("APPLICATION_PORT")
 	if port == "" {

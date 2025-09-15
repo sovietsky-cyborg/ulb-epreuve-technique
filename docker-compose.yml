@@ -2,6 +2,8 @@ services:
   api:
     image: "golang:latest"
     environment:
+      APPLICATION_PORT: "8000"
+      APPLICATION_DEBUG: "true"
       SWAGGER_URI: "https://b0s0kwos00g48ow8cg0skg4w.89.116.111.143.sslip.io"
     command: "go run main.go"
     volumes:

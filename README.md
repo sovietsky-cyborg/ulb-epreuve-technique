@@ -16,7 +16,7 @@ This project include two parts
 
 ## SPA
 
-#### The frontend is situated in frontend/ directory
+The frontend is situated in frontend/ directory
 
 ### Install dependencies
 

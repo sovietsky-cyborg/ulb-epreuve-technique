@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	_ "os"
@@ -25,7 +24,6 @@ func GetClient() *SwaggerClient {
 
 func (c *SwaggerClient) GetData(path string) ([]byte, error) {
 
-	fmt.Println("urls ", c.url+path)
 	resp, err := http.Get(c.url + path)
 	if err != nil {
 		return nil, err
