@@ -76,12 +76,15 @@ var GetBulletinHandler = func(w http.ResponseWriter, r *http.Request) interface{
 	bulletin.Matricule = currentInscription.Matricule
 	bulletin.Annee = currentInscription.AnneeEtude
 
+	// Just Get all the note for this inscription,
+	// no need to wait O(N_Courses * API_Calls) by calling swagger endpoint for each mnemonique
 	body, err = client.GetData("/notes?matricule=" + currentInscription.Matricule)
 	var notes []models.ListeNotes
 	err = json.Unmarshal(body, &notes)
 
 	notesByCours := make(map[string]models.ListeNotes)
 
+	// instead of that, we keep track of notes by mnemonique
 	for _, note := range notes {
 		notesByCours[note.Mnemonique] = note
 	}
@@ -91,7 +94,7 @@ var GetBulletinHandler = func(w http.ResponseWriter, r *http.Request) interface{
 		body, err = client.GetData("/cours?mnemonique=" + cour)
 		var currentCours []models.ListeCours
 		err = json.Unmarshal(body, &currentCours)
-
+		// then, recover them when iterating throughout currentInscription.CoursJson
 		currentNote := notesByCours[currentCours[0].Mnemonique].Note
 		bulletin.TotalCredits += currentCours[0].Credit
 		bulletin.ListeCours = append(bulletin.ListeCours, ListeCoursNotes{

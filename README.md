@@ -38,6 +38,6 @@ This project include two parts
 
 `podman-compose up -d` 
 
-[!NOTE] 
+[!NOTE]
 (dont forget to install dependencies and build the sources for the SPA)
 
